@@ -61,6 +61,10 @@ app.use((req, res, next) => {
 //routes
 app.use('/', viewRouter);
 
+app.all('*', (req, res, next) => {
+  next(new AppError(`Cant find ${req.originalUrl} on this server`));
+});
+
 //errors
 app.use(globalErrorHandler);
 
