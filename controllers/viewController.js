@@ -2,13 +2,14 @@ const Book = require('../models/BookModel');
 const BookRequest = require('../models/requestModel');
 const Ticket = require('../models/TicketModel');
 const catchAsync = require('../utils/catchAsync');
+const Features = require('../utils/Features');
 
 exports.getHome = catchAsync(async (req, res, next) => {
   const featuredBooks = await Book.find({ featured: true })
     .limit(4)
     .sort('-createdAt');
   //console.log(req.user);
-  const recentlyAdded = await Book.find().limit(20);
+  const recentlyAdded = await Book.find().limit(20).sort('-createdAt');
   res.status(200).render('index', {
     featuredBooks,
     recentlyAdded,
@@ -22,10 +23,43 @@ exports.getBook = catchAsync(async (req, res, next) => {
   });
 });
 
+exports.bookSearch = catchAsync(async (req, res, next) => {
+  console.log(req.query.search);
+  let query = Book.find();
+  if (req.query.search != null && req.query.search != '') {
+    query = query.regex('title', new RegExp(req.query.search, 'i'));
+    //console.log(query);
+  }
+  const books = await query.sort({ createdAt: 'desc' }).exec();
+  //console.log(books);
+  res.status(200).render('searchBook', {
+    books,
+    crit: req.query.search,
+  });
+});
+
 exports.getAllBooks = catchAsync(async (req, res, next) => {
-  const books = await Book.find().sort('-createdAt');
+  const determine = await Book.find();
+  //console.log(req.query.page);
+  let No;
+  if (req.query.page == undefined) {
+    No = 1;
+  } else {
+    No = parseInt(req.query.page);
+  }
+  const features = new Features(Book.find(), req.query)
+    .filter()
+    .sort()
+    .limitFields()
+    .paginate();
+  const books = await features.query;
+  //console.log(books);
+  const limit = 20;
+  const pages = Math.ceil(determine.length / limit);
   res.status(200).render('allBooks', {
     books,
+    pages,
+    No,
   });
 });
 

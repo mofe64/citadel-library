@@ -1,18 +1,18 @@
-const mongoose = require('mongoose');
 const dotenv = require('dotenv');
+dotenv.config({ path: './config.env' });
+const mongoose = require('mongoose');
 
 const app = require('./app');
 
-dotenv.config({ path: './config.env' });
-
 mongoose
-  .connect(process.env.DATABASE_LOCAL, {
+  .connect(process.env.DATABASE_ATLAS, {
     useNewUrlParser: true,
     useCreateIndex: true,
     useFindAndModify: false,
     useUnifiedTopology: true,
   })
-  .then(() => console.log('DB connection successful'));
+  .then(() => console.log('DB connection successful'))
+  .catch((err) => console.log(err));
 
 const port = process.env.PORT || 3000;
 const server = app.listen(port, () => {

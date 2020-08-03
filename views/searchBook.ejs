@@ -11,7 +11,7 @@
     </div>
     <section class="static about-sec">
         <div class="container">
-            <h2>recently added </h2>
+            <h2>Showing results for : <%= crit %></h2>
             <div class="recent-book-sec">
                 <div class="row">
                 <% books.forEach((book) => { %>
@@ -23,20 +23,9 @@
                     </div>
                 <% }) %>
                 </div>
-                
-                 <div class="btn-sec">
-                 <% if (No > 1 ) { %>
-                    <a href="/books?page=<%=No - 1 %>" class="btn gray-btn">Prev Page</a>
-                 <% } %>
-                <% if (No < pages) {%> 
-                    <a href="/books?page=<%=No + 1 %>" class="btn gray-btn">Next Page</a>
-                <% } %>
-                </div>
             </div>
         </div>
     </section>
-    
-    
     <%- include('partials/footer'); -%>
     <%- include('partials/scripts'); -%>
 </body>

@@ -8,6 +8,7 @@ router.use(authController.isLoggedIn); //check user logged in status
 router.route('/').get(viewController.getHome); //home
 router.route('/about').get(viewController.getAbout);
 router.route('/books').get(viewController.getAllBooks);
+router.route('/find').get(viewController.bookSearch);
 router
   .route('/register')
   .get(viewController.getRegister)
@@ -26,6 +27,9 @@ router
   .post(authController.ensureAuthenticated, viewController.makeRequest);
 
 //admin
+router.use(authController.ensureAuthenticated);
+router.use(authController.restrictTo('librarian'));
+
 router.route('/admin/dashboard').get(viewController.getAdminHome);
 
 router
