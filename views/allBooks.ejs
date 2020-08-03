@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('partials/head'); -%>
+<body>
+   <%- include('partials/header'); -%>
+    <div class="breadcrumb">
+        <div class="container">
+            <a class="breadcrumb-item" href="/">Home</a>
+            <span class="breadcrumb-item active">Books</span>
+        </div>
+    </div>
+    <section class="static about-sec">
+        <div class="container">
+            <h2>recently added </h2>
+            <div class="recent-book-sec">
+                <div class="row">
+                <% books.forEach((book) => { %>
+                    <div class="col-md-3">
+                        <div class="item">
+                            <a href="/books/<%=book.slug %>"><img src="<%=book.coverImage %>" alt="img"></a>
+                            <h3><a href="/books/<%=book.slug %>"><%= book.title %></a></h3>
+                        </div>
+                    </div>
+                <% }) %>
+                </div>
+                <div class="btn-sec">
+                    <a href="products.html" class="btn gray-btn">load More books</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <%- include('partials/footer'); -%>
+    <%- include('partials/scripts'); -%>
+</body>
+
+</html>

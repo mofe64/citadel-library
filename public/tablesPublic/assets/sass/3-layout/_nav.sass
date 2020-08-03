@@ -1,0 +1,102 @@
+.nav-bar
+    box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.6)
+    position: absolute
+    width: 100%
+    z-index: 48
+    top: 0
+    background-color: $white
+    .logo
+        padding: 8px
+        margin: 4px 0!important
+        float: left
+        img
+            width: 160px
+            @media screen and (max-width: 768px)
+                width: 120px
+    .main-nav
+        padding: 0
+        margin: 0
+        clear: both
+        max-height: 0
+        overflow: hidden
+        transition: max-height .8s ease-out
+        li
+            list-style: none
+            margin: auto 0
+        a
+            color: $black
+            display: block
+            border-radius: 4px
+            padding: 10px 24px
+            margin: 10px 0
+            text-decoration: none 
+            font-weight: 700
+            text-transform: uppercase
+            transition: all 0.2s ease
+            @media screen and (max-width: 768px)
+                font-size: 14px
+        a:hover
+            color: $white
+            background-color: $accent
+    .menu-toggle
+        display: none
+    .menu-toggle:checked ~ .main-nav
+        max-height: 400px
+
+    /* CSS hamburger menu */
+    .menu-icon 
+        padding: 1em 1.2em
+        margin: .6rem 0
+        position: relative
+        cursor: pointer
+        z-index: 51
+        float: right
+        .hamburger, .hamburger::before, .hamburger::after 
+            content: ""
+            display: block
+            background: $accent
+            height: 3px
+            width: 1.8rem
+            border-radius: 4px
+            transition: all .4s ease-out
+
+        .hamburger::before 
+            transform: translateY(-8px)
+
+        .hamburger::after 
+            transform: translateY(5px) 
+
+    /* X button with CSS */
+    .menu-toggle:checked ~ .menu-icon .hamburger 
+        transform: rotate(45deg)
+        background: $accent
+
+    .menu-toggle:checked ~ .menu-icon .hamburger::after
+        transform: translateY(-3px) rotate(-90deg)
+        background: $accent
+
+    .menu-toggle:checked ~ .menu-icon .hamburger::before
+        opacity: 0
+
+    @media screen and (min-width: 770px)
+        li
+            float: left
+        .main-nav
+            clear: none
+            float: right
+            max-height: none
+        .menu-icon
+            display: none
+    // dropdown menu
+    .dropdown
+        position: inherit
+    .dropdown-menu
+        max-width: 200px
+        text-align: center
+        .total-balance
+            background-color: $accent
+            color: $white!important
+            border-radius: 0px!important
+    // Username lowercase
+    a.dropdown-toggle
+        text-transform: none

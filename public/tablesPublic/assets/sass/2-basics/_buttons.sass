@@ -1,0 +1,31 @@
+.button,
+button,
+input[type="submit"],
+input[type="reset"],
+input[type="button"]
+  display: inline-block
+  padding: 1rem 5rem
+  color: $white
+  text-align: center
+  font-size: 16px
+  letter-spacing: 1px
+  font-weight: 600
+  font-family: 'Oxygen', sans-serif
+  text-transform: uppercase
+  text-decoration: none
+  white-space: nowrap
+  background-color: $accent
+  border-radius: .5rem
+  border: none
+  cursor: pointer
+  box-sizing: border-box
+  transition: all 0.2s ease
+
+  &:hover,
+  &:active,
+  &:focus
+    background-color: $blue
+    color: $white
+    outline: 0
+    transform: scale(1.01)
+    transform: translateY(3px)

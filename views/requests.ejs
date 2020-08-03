@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include('partials/head'); -%>
+<body>
+    <%- include('partials/header'); -%>
+    <div class="container">
+    <h2>Make a request for a book</h2>
+    <br>
+    <br>
+    <br>
+    <div class="form">
+    <form action="/request" method="POST">
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="inputEmail4">Book Title</label>
+      <input type="text" class="form-control" id="inputEmail4" placeholder="What's the book title" name="title" required>
+    </div>
+    <div class="form-group col-md-6">
+      <label for="inputPassword4">Book Author</label>
+      <input type="text" class="form-control" id="inputPassword4" name="author" placeholder="Who Wrote the book" required>
+    </div>
+  </div>
+    <div class="form-group">
+    <label for="exampleFormControlTextarea1">Give a brief description of the book (If you can, not compulsory)</label>
+    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="description"></textarea>
+  </div>
+  <div class="form-group">
+    <label for="inputAddress2">Pulish Date (Give an estimate if you're not sure)</label>
+    <input type="date" name="publishDate"  class="form-control">
+  </div>
+    <% if(user) {%>
+  <input type="hidden" name="userId" value="<%= user._id%>">
+  <% } %>
+  
+
+  <button type="submit" class="btn btn-primary">Make Request</button>
+  <br>
+  <br>
+  <br>
+</form>
+    </div>
+    <br>
+    <br>
+    <br>
+    <div class="container">
+    <H1>Request History</H1>
+    <br>
+    <div class="row">
+      <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Book Title</th>
+      <th scope="col">Status</th>
+      <th scope="col">Handle</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td>Mark</td>
+      <td>Otto</td>
+      <td>@mdo</td>
+    </tr>
+    <tr>
+      <th scope="row">2</th>
+      <td>Jacob</td>
+      <td>Thornton</td>
+      <td>@fat</td>
+    </tr>
+    <tr>
+      <th scope="row">3</th>
+      <td>Larry</td>
+      <td>the Bird</td>
+      <td>@twitter</td>
+    </tr>
+  </tbody>
+</table>
+    </div>
+  </div>
+    </div>
+    <%- include('partials/footer'); -%>
+    <%- include('partials/scripts'); -%>
+</body>
+
+</html>

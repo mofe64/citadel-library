@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('adminPartials/head'); -%>
+  <body>
+    <%- include('adminPartials/nav'); -%>
+    <div class="container-scroller">
+    <!-- partial -->
+		<div class="container-fluid page-body-wrapper">
+			<div class="main-panel">
+				<div class="content-wrapper">
+					<div class="row">
+						<div class="col-sm-6 mb-4 mb-xl-0">
+							<div class="d-lg-flex align-items-center">
+								<div>
+									<h3 class="text-dark font-weight-bold mb-2">Hi, welcome back Librarian Mofe!</h3>
+									<h6 class="font-weight-normal mb-2">Last login was 23 hours ago. View details</h6>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+			<div class="col-lg-12 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title">Latest Uploads</h4>
+                  <div class="table-responsive">
+                    <table class="table table-striped" id="uploads">
+                      <thead>
+                        <tr>
+                          <th>
+                            No
+                          </th>
+                          <th>
+                            Book Title
+                          </th>
+                          <th>
+                            Book Author
+                          </th>
+                          <th>
+                            Featured
+                          </th>
+                          <th>
+                            Page Count
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <% books.forEach((book,index)=> { %>
+                            <tr>
+                            <td >
+                                <%= index + 1 %>
+                            </td>
+                            <td>
+                              <%= book.title %>
+                            </td>
+                            <td>
+                                <%= book.author %>
+                            </td>
+                            <td>
+                               <%= book.featured %>
+                            </td>
+                            <td>
+                               <%= book.pageCount %>
+                            </td>
+                            </tr>
+                        <% }) %>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-12 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title">Latest Requests</h4>
+                  <div class="table-responsive">
+                    <table class="table table-striped" id="requests">
+                      <thead>
+                        <tr>
+                          <th>
+                            No
+                          </th>
+                          <th>
+                            Username
+                          </th>
+                          <th>
+                            Book Title
+                          </th>
+                          <th>
+                            Book Author
+                          </th>
+                          <th>
+                            Status
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                      <% requests.forEach((request,index)=> { %>
+                        <tr>
+                          <td >
+                           <%= index +1 %>
+                          </td>
+                          <td>
+                            <% if (request.userId !== undefined) {%>
+                            <%= request.userId.username %>
+                            <%} else {%>
+                              anon
+                            <% } %>
+                          </td>
+                          <td>
+                           <a href="/admin/request/<%=request._id %>"><%= request.bookName %></a>
+                          </td>
+                          <td>
+                            <%=request.bookAuthor %>
+                          </td>
+                          <td>
+                            <% if (request.status == false ) { %>
+                              pending
+                           <% } else { %>
+                              fufilled
+                           <%} %>
+                          </td>
+                        </tr>
+                        <% }) %>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-12 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title">Latest Tickets</h4>
+                  <div class="table-responsive">
+                    <table class="table table-striped" id="tickets">
+                      <thead>
+                        <tr>
+                          <th>
+                            Book Title
+                          </th>
+                          <th>
+                            Book Author
+                          </th>
+                          <th>
+                            Issue
+                          </th>
+                          <th>
+                            test
+                          </th>
+                          <th>
+                            test
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td >
+                            test
+                          </td>
+                          <td>
+                            test
+                          </td>
+                          <td>
+                            test
+                          </td>
+                          <td>
+                            test
+                          </td>
+                          <td>
+                            test
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+					
+		</div>
+				<!-- content-wrapper ends -->
+				<!-- partial:partials/_footer.html -->
+    <%- include('adminPartials/footer'); -%>
+				<!-- partial -->
+			</div>
+			<!-- main-panel ends -->
+		</div>
+		<!-- page-body-wrapper ends -->
+    </div>
+    <!-- container-scroller -->
+    <%- include('adminPartials/scripts'); -%>
+  </body>
+</html>
