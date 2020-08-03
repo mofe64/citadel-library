@@ -13,7 +13,30 @@
 							<div class="d-lg-flex align-items-center">
 								<div>
 									<h3 class="text-dark font-weight-bold mb-2">Hi, welcome back Librarian Mofe!</h3>
-									<h6 class="font-weight-normal mb-2">Last login was 23 hours ago. View details</h6>
+                   <% if (success_msg != '') {%>
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <%= success_msg %>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                <% } %>
+                <% if (error_msg != '') {%>
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        <%= error_msg %>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                <% } %>
+                 <% if (error != '') {%>
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        <%= error %>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                <% } %>
 								</div>
 							</div>
 						</div>
@@ -51,7 +74,7 @@
                                 <%= index + 1 %>
                             </td>
                             <td>
-                              <%= book.title %>
+                             <a href="/admin/editBook/<%=book.slug%>"> <%= book.title %></a>
                             </td>
                             <td>
                                 <%= book.author %>
@@ -138,40 +161,42 @@
                       <thead>
                         <tr>
                           <th>
+                            No
+                          </th>
+                          <th>
                             Book Title
                           </th>
                           <th>
                             Book Author
                           </th>
                           <th>
-                            Issue
+                            complaint
                           </th>
                           <th>
-                            test
-                          </th>
-                          <th>
-                            test
+                            status
                           </th>
                         </tr>
                       </thead>
                       <tbody>
+                      <% tickets.forEach((ticket,index)=> { %>
                         <tr>
                           <td >
-                            test
+                            <%= index + 1 %>
                           </td>
                           <td>
-                            test
+                            <%= ticket.book %>
                           </td>
                           <td>
-                            test
+                            <%= ticket.author %>
                           </td>
                           <td>
-                            test
+                            <%= ticket.complaint %>
                           </td>
                           <td>
-                            test
+                            <%= ticket.status %>
                           </td>
                         </tr>
+                      <% }) %>
                       </tbody>
                     </table>
                   </div>

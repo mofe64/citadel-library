@@ -1,5 +1,6 @@
 const Book = require('../models/BookModel');
 const BookRequest = require('../models/requestModel');
+const Ticket = require('../models/TicketModel');
 const catchAsync = require('../utils/catchAsync');
 
 exports.getHome = catchAsync(async (req, res, next) => {
@@ -58,6 +59,23 @@ exports.getLogin = catchAsync(async (req, res, next) => {
   res.status(200).render('login');
 });
 
+exports.getTicketPage = catchAsync(async (req, res, next) => {
+  const book = await Book.findById(req.params.bookId);
+  res.status(200).render('ticket', {
+    book,
+  });
+});
+
+exports.submitTicket = catchAsync(async (req, res, next) => {
+  const newTicket = await Ticket.create({
+    book: req.body.book,
+    author: req.body.author,
+    complaint: req.body.complaint,
+  });
+  req.flash('success_msg', 'ticket submitted successfully');
+  res.redirect('/');
+});
+
 //admin controllers
 exports.getAdminHome = catchAsync(async (req, res, next) => {
   const books = await Book.find().limit(50);
@@ -65,10 +83,12 @@ exports.getAdminHome = catchAsync(async (req, res, next) => {
     path: 'userId',
     select: '-password -firstname -lastname -email ',
   });
+  const tickets = await Ticket.find({ status: 'pending' });
   //console.log(requests);
   res.status(200).render('admin/adminHome', {
     books,
     requests,
+    tickets,
   });
 });
 
@@ -100,6 +120,35 @@ exports.uploadBook = catchAsync(async (req, res, next) => {
     description: req.body.description,
   });
   res.status(201).redirect('/admin/dashboard');
+});
+
+exports.editBookPage = catchAsync(async (req, res, next) => {
+  const book = await Book.findOne({ slug: req.params.slug });
+  //console.log(book);
+  res.status(200).render('admin/editBook', {
+    book,
+  });
+});
+
+exports.editBook = catchAsync(async (req, res, next) => {
+  const book = await Book.findOne({ slug: req.params.slug });
+  let featuredCheck;
+  if (req.body.featured) {
+    featuredCheck = true;
+  } else {
+    featuredCheck = false;
+  }
+  const editedBook = await Book.findByIdAndUpdate(book._id, {
+    title: req.body.title,
+    author: req.body.author,
+    pageCount: req.body.pageCount,
+    coverImage: req.body.coverImage,
+    featured: featuredCheck,
+    downloadLink: req.body.downloadLink,
+    description: req.body.description,
+  });
+  req.flash('success_msg', 'Book updated successfully');
+  res.redirect('/admin/dashboard');
 });
 
 exports.uploadBooksToCloudinary = catchAsync(async (req, res, next) => {

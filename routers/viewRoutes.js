@@ -15,6 +15,10 @@ router
 router.route('/login').get(viewController.getLogin).post(authController.login);
 router.route('/logout').get(authController.logout);
 router.route('/books/:slug').get(viewController.getBook);
+router
+  .route('/ticket/:bookId')
+  .get(viewController.getTicketPage)
+  .post(viewController.submitTicket);
 
 router
   .route('/request')
@@ -23,10 +27,19 @@ router
 
 //admin
 router.route('/admin/dashboard').get(viewController.getAdminHome);
+
 router
   .route('/admin/book')
   .get(viewController.getBookUploadPage)
   .post(viewController.uploadBook);
+
+//edit book
+router
+  .route('/admin/editBook/:slug')
+  .get(viewController.editBookPage)
+  .patch(viewController.editBook);
+
+//cloudinary upload
 router.route('/admin/cloudinary').get(viewController.uploadBooksToCloudinary);
 
 router

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('adminPartials/head'); -%>
+
+<body>
+  <div class="container-scroller">
+    <!-- partial:../../partials/_horizontal-navbar.html -->
+    <%- include('adminPartials/nav'); -%>
+        <!-- partial -->
+    <div class="container-fluid page-body-wrapper">
+      <div class="main-panel">
+        <div class="content-wrapper">
+          <div class="row">
+            <div class="col-12 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title">Upload a new book</h4>
+                  <form class="forms-sample" action="/admin/editBook/<%=book.slug %>?_method=PATCH" method="post">
+                    <div class="form-group">
+                      <label for="exampleInputName1">Title</label>
+                      <input type="text" class="form-control" id="exampleInputName1" placeholder="Book Title" name="title" required value="<%=book.title %>">
+                    </div>
+                    <div class="form-group">
+                      <label for="exampleInputEmail3">Author</label>
+                      <input type="text" class="form-control" id="exampleInputEmail3" placeholder="Book Author" name="author" required value="<%=book.author %>">
+                    </div>
+                    <div class="form-group">
+                      <label for="exampleInputPassword4">Page Count</label>
+                      <input type="number" class="form-control" id="exampleInputPassword4" placeholder="Page Count" name="pageCount" value="<%=book.pageCount %>">
+                    </div>
+                    <div class="form-group">
+                      <label for="exampleInputCity1">Cover Image</label>
+                      <input type="text" class="form-control" id="exampleInputCity1" placeholder="Cover Image" name="coverImage" required value="<%=book.coverImage %>">
+                    </div>
+                    <div class="form-group">
+                      <label for="exampleInputCity1">Download Link</label>
+                      <input type="text" class="form-control" id="exampleInputCity1" placeholder="Download Link" name="downloadLink" required value="<%=book.downloadLink %>">
+                    </div>
+                    <div class="form-group">
+                      <label for="exampleInputCity1">Short Description</label>
+                      <textarea  class= "form-control" name="description" id="" cols="30" rows="10">
+                      <%=book.description %>
+                      </textarea>
+                    </div>
+                     <div class="form-group">
+                    <label for="featured">Featured</label>
+                    <input type="checkbox" name="featured" 
+                    <% if(book.featured == true) {%>
+                    checked
+                    <%} %>
+                    id="featured">                        
+                    </div>
+                    <button type="submit" class="btn btn-primary mr-2">Make Changes</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- footer  -->
+        <%- include('adminPartials/footer'); -%>
+      </div>
+    </div>
+  </div>
+ <%- include('adminPartials/scripts'); -%>
+</body>
+
+</html>

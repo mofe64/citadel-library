@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include('partials/head'); -%>
+<body>
+    <%- include('partials/header'); -%>
+    <div class="container">
+        <h2>Kindly Tell us what's wrong with this book and we'd sort things out as soon as we can </h2>
+            <br>
+            <br>
+            <br>
+        <div class="form">
+        <form action="/ticket/<%=book._id %>" method="POST">
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                <label for="inputEmail4">Book Title</label>
+                <input type="text" class="form-control" id="inputEmail4" value="<%=book.title %>" name="book" readonly>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="inputPassword4">Book Author</label>
+                <input type="text" class="form-control" id="inputPassword4" 
+                name="author" value="<%=book.author%>" readonly>
+            </div>
+            <div class="form-group">
+                <label for="exampleFormControlSelect1">What's the problem with this book</label>
+                <select class="form-control form-control-lg" id="exampleFormControlSelect1" name="complaint">
+                    <option value="Broken download Link">Broken download Link</option>
+                    <option value ="Wrong Book (Book downloaded was wrong )">Wrong Book (Book downloaded was wrong )</option>
+                    <option value="Copyright claims">Copyright claims</option>
+                    <option value="Wrong title">Wrong Title</option>
+                    <option value="Wrong Cover Image">Wrong Cover Image</option>
+                </select>
+            </div>
+        </div>
+            <button type="submit" class="btn btn-primary">Submit Ticket</button>
+
+        <br>
+        <br>
+        <br>
+    </form>
+   
+    
+  </div>
+    </div>
+    <%- include('partials/scripts'); -%>
+</body>
+
+</html>
