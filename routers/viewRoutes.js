@@ -37,13 +37,21 @@ router
 router
   .route('/admin/editBook/:slug')
   .get(viewController.editBookPage)
-  .patch(viewController.editBook);
+  .patch(viewController.editBook)
+  .delete(viewController.deleteBook);
 
 //cloudinary upload
 router.route('/admin/cloudinary').get(viewController.uploadBooksToCloudinary);
 
+//requests
 router
   .route('/admin/request/:requestId')
   .get(viewController.getRequestsPageAdmin)
   .post(viewController.fulfillRequest);
 module.exports = router;
+
+//tickets
+router
+  .route('/admin/tickets/:ticketId')
+  .get(viewController.getFixTicket)
+  .patch(viewController.updateTicket);

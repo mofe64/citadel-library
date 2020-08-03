@@ -151,6 +151,14 @@ exports.editBook = catchAsync(async (req, res, next) => {
   res.redirect('/admin/dashboard');
 });
 
+exports.deleteBook = catchAsync(async (req, res, next) => {
+  //const book = await Book.findById(req.body.bookId);
+  await Book.findByIdAndDelete(req.body.bookId);
+  //console.log(book);
+  req.flash('success_msg', 'Book Deleted successfully');
+  res.redirect('/admin/dashboard');
+});
+
 exports.uploadBooksToCloudinary = catchAsync(async (req, res, next) => {
   res.status(200).render('admin/cloudinaryUploadPage');
 });
@@ -170,4 +178,21 @@ exports.fulfillRequest = catchAsync(async (req, res, next) => {
     return res.status(200).redirect(`/admin/request/${request._id}`);
   }
   res.status(200).redirect(`/admin/request/${req.params.requestId}`);
+});
+
+exports.getFixTicket = catchAsync(async (req, res, next) => {
+  const ticket = await Ticket.findById(req.params.ticketId);
+  const book = await Book.findOne({ title: ticket.book });
+  res.status(200).render('admin/fixTicket', {
+    book,
+    ticket,
+  });
+});
+
+exports.updateTicket = catchAsync(async (req, res, next) => {
+  const ticket = await Ticket.findByIdAndUpdate(req.params.ticketId, {
+    status: 'fixed',
+  });
+  req.flash('success_msg', 'Ticket Updated');
+  res.redirect('/admin/dashboard');
 });
